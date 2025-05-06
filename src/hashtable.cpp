@@ -1,4 +1,19 @@
-ListNode * ListNode::find(string key, ListNode * L);
+ListNode * ListNode::find(string key, ListNode * L){
+    if (L == nullptr){
+        error("ListNode", " Is empty");
+    }
+    else{
+        //loop through each checking if L.data == key then going to next if not
+        ListNode* new_l = L
+        for(;new_l!=nullptr;){
+            if(new_l->data == key){
+                retrun new_l;
+            }
+            new_l = new_l->next;
+        }
+        return nullptr; 
+    }
+}
 ListNode * ListNode::insert(string key, ListNode * L);
 ListNode * ListNode::remove(string key, ListNode * L);
 void ListNode::print(ostream & out, ListNode * L);

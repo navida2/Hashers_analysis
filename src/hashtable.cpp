@@ -18,7 +18,16 @@ ListNode * ListNode::insert(string key, ListNode * L){//insert at head
     ListNode* new_head = new ListNode(key,L);
     return new_head; 
 }
-ListNode * ListNode::remove(string key, ListNode * L);
+ListNode * ListNode::remove(string key, ListNode * L){//remove the node that has the key
+    if (L == nullptr){
+        error("ListNode", " Is empty");
+    }
+    else{
+        ListNode* curr = L;
+        ListNode* next = curr->next;
+        for(curr!=)
+    }
+}
 void ListNode::print(ostream & out, ListNode * L);
 int ListNode::length(ListNode * L);
 void ListNode::delete_list(ListNode * L);

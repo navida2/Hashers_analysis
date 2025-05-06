@@ -45,7 +45,16 @@ int ListNode::length(ListNode * L){//count number of nodes in the list
     return len;
 
 }
-void ListNode::delete_list(ListNode * L);
+void ListNode::delete_list(ListNode * L){//trav the list deleting each node till its done
+    ListNode* curr_node = L;
+    ListNode* next_node = curr_node->next;
+    for(;curr_node!=nullptr;){
+        delete curr_node;
+        curr_node=new_next;
+        next_node = curr->next;
+
+    }
+}
 void ListNode::error(string word, string msg){
     cout<<word<<msg<<endl;
 }

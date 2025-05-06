@@ -19,7 +19,9 @@ ListNode * ListNode::remove(string key, ListNode * L);
 void ListNode::print(ostream & out, ListNode * L);
 int ListNode::length(ListNode * L);
 void ListNode::delete_list(ListNode * L);
-void ListNode::error(string word, string msg);
+void ListNode::error(string word, string msg){
+    cout<<word<<msg<<endl;
+}
 
 
 void HashTable::insert( const string & word);

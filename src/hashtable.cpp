@@ -24,11 +24,17 @@ ListNode * ListNode::remove(string key, ListNode * L){//remove the node that has
     }
     else{
         ListNode* curr = L;
-        ListNode* next = curr->next;
+        ListNode* next = curr->next; //COME BACK AND FINISH
         for(curr!=)
     }
 }
-void ListNode::print(ostream & out, ListNode * L);
+void ListNode::print(ostream & out, ListNode * L){//Traverse list and print everything
+    ListNode * printing_node = L;
+    for(;printing_node!=nullptr;){
+        out<<printing_node->data<<" ";
+        printing_node = printing_node->next;
+    }
+}
 int ListNode::length(ListNode * L);
 void ListNode::delete_list(ListNode * L);
 void ListNode::error(string word, string msg){

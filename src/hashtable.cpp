@@ -63,8 +63,12 @@ void ListNode::error(string word, string msg){
 void HashTable::insert( const string & word);
 bool HashTable::find( const string & word);
 void HashTable::remove( const string & word);
-bool HashTable::is_empty();
-bool HashTable::is_full();
+bool HashTable::is_empty(){//use number of entries for this 
+    return number_of_entries() == 0;
+}
+bool HashTable::is_full(){
+    return false;
+}
 void HashTable::print(ostream & out);
 HashTable::~HashTable();
 

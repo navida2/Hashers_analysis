@@ -35,7 +35,16 @@ void ListNode::print(ostream & out, ListNode * L){//Traverse list and print ever
         printing_node = printing_node->next;
     }
 }
-int ListNode::length(ListNode * L);
+int ListNode::length(ListNode * L){//count number of nodes in the list
+    int len = 0;
+    ListNode* curr_node = L;
+    for(;curr_node!=nullptr;){
+        ++len;
+        curr_node=curr_node->next;
+    }
+    return len;
+
+}
 void ListNode::delete_list(ListNode * L);
 void ListNode::error(string word, string msg){
     cout<<word<<msg<<endl;

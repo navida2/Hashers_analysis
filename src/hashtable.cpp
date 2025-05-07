@@ -161,7 +161,19 @@ void HashTable::get_chain_lengths(vector<int> & v){
     }
 }
 
-void insert_all_words(string file_name, HashTable & L);
+void insert_all_words(string file_name, HashTable & L){
+    Timer t;
+    double eTime;
+    ifstream in(file_name);
+    int limit = k *NWORDS /10;
+    t.start();
+    for (string word; (in>>word)&&limit>0; --limit){
+        L.insert(word);
+    }
+    t.elapsedUserTime(eTime);
+    in.close();
+    cout<<"\t\tI = " <<eTime<<endl;
+}
 void find_all_words(string file_name, HashTable & L);
 void remove_all_words(string file_name, HashTable & L);
 

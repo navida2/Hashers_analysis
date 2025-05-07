@@ -81,7 +81,11 @@ void ListNode::error(string word, string msg){
 }
 
 
-void HashTable::insert( const string & word);
+void HashTable::insert( const string & word){
+    size_t hash_value = hasher(word) %capacity; 
+    ListNode* list_at_hash_value = buf[hash_value];
+    buf[hash_value] = ListNode::insert(word, list_at_hash_value);
+}
 
 bool HashTable::find( const string & word){
     //get the has value and then use find lsit node
@@ -95,7 +99,7 @@ bool HashTable::find( const string & word){
 void HashTable::remove( const string & word){
     size_t hash_value = hasher(word) %capacity; 
     ListNode* list_at_hash_value = buf[hash_value];
-    ListNode::remove(word, list_at_hash_value);
+    buf[hash_value] = ListNode::remove(word, list_at_hash_value);
 }
 
 bool HashTable::is_empty(){//use number of entries for this 

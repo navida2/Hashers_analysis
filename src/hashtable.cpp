@@ -201,5 +201,17 @@ void remove_all_words(string file_name, HashTable & L){
     cout<<"\t\tR = " <<eTime<<endl;
 }
 
-void measure_hashtable(string file_name, HashTable & L);
+void measure_hashtable(string file_name, HashTable & L){
+    cout<<L.name<<endl;
+    for(int K=1;K<=10;++K){
+        cout<<"\tK = "<<K<<endl;
+        insert_all_words(K, file_name,L);
+        find_all_words(K,file_name,L);
+        remove_all_words(K,file_name,L);
+        if(!L.is_empty()){
+            error(L.name, "is not empty");
+        }
+    }
+
+}
 void measure_hashtables(string input_file);

@@ -118,7 +118,7 @@ size_t HashTable::number_of_chains(){
     //count how many non null there are
     size_t num_entrys =0;
     
-    for (size_t i=0; i<capacity;++i){
+    for (int i=0; i<capacity;++i){
         ListNode* first_entry = buf[i];
         if (first_entry == nullptr){
             continue;
@@ -130,7 +130,21 @@ size_t HashTable::number_of_chains(){
 }
     return num_entrys;
 }
-void HashTable::get_chain_lengths(vector<int> & v);
+void HashTable::get_chain_lengths(vector<int> & v){
+    //loop thru the buff and then coun thechains and entreis
+
+    for (int i = 0; i<capacity;++i){
+        int num_per_buf = 0;
+        ListNode* first_entry = buf[i];
+        if(first_entry!=nullptr){
+            for(;first_entry!=nullptr;first_entry=first_entry->next){
+                num_per_buf+=1;
+            }
+        }
+
+        v[i] = num_per_buf;
+    }
+}
 
 void insert_all_words(string file_name, HashTable & L);
 void find_all_words(string file_name, HashTable & L);

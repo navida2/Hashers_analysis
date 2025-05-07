@@ -30,4 +30,16 @@ Stats::Stats(string name, const vector<int> & chain_lengths) : name(name), chain
     // int span = 0;
     // double mean = 0;
     // double stddev = 0;//
+    min = chain_lengths[0];
+    max = chain_lengths[0];
+    for (int var:chain_lengths){
+        if (var>max){
+            max = var;
+        }
+        else if(var<min){
+            min = var;
+        }
+    }
+    stddev = compute_stddev(chain_lengths);
+    mean = compute_mean(chain_lengths);
 }

@@ -241,4 +241,14 @@ struct ChatGPTHasher
         return hash_val;
     }
 };
+
+struct MyHasher
+    : public Hasher
+{
+    MyHasher()
+        : Hasher("MyHasher")
+    {
+    }
+    size_t hash_val=0;
+};
 #endif

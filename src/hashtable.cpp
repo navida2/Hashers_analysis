@@ -7,7 +7,7 @@ ListNode * ListNode::find(string key, ListNode * L){
         ListNode* new_l = L
         for(;new_l!=nullptr;){
             if(new_l->data == key){
-                retrun new_l;
+                return new_l;
             }
             new_l = new_l->next;
         }
@@ -98,7 +98,7 @@ HashTable::~HashTable();
 
 size_t HashTable::number_of_entries(){
     //loop through buf checking if each node is nullptr
-    int num_entrys =0;
+    size_t num_entrys =0;
     
     for (size_t i=0; i<capacity;++i){
         ListNode* first_entry = buf[i];
@@ -110,11 +110,26 @@ size_t HashTable::number_of_entries(){
             for(;first_entry!=nullptr;first_entry = first_entry->next)
             num_entrys+=1;
         }
-    
+    //ask ta if there is sum way that this should call num of chains
     }
     return num_entrys;
 }
-size_t HashTable::number_of_chains();
+size_t HashTable::number_of_chains(){
+    //count how many non null there are
+    size_t num_entrys =0;
+    
+    for (size_t i=0; i<capacity;++i){
+        ListNode* first_entry = buf[i];
+        if (first_entry == nullptr){
+            continue;
+        }
+        else{
+            num_entrys+=1;
+        }
+    
+}
+    return num_entrys;
+}
 void HashTable::get_chain_lengths(vector<int> & v);
 
 void insert_all_words(string file_name, HashTable & L);

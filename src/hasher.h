@@ -249,8 +249,9 @@ struct MyHasher
         : Hasher("MyHasher"){}
     size_t hash(string key, int N) const
     {
+        
 
-    {//basically plan is to get every value in ascsii multiply it by its position and by the ascii of "drake" for fun
+    //basically plan is to get every value in ascsii multiply it by its position and by the ascii of "drake" for fun
         size_t hash_val = 0;
         size_t curr_position = 1;
         string multiplier = "Drake";
@@ -259,11 +260,11 @@ struct MyHasher
             ascii_drake+= (size_t)c;
         }
         for (char c:key){
-            hash_val += (size_t)c *curr_position * multiplier;
+            hash_val += (size_t)c *curr_position * ascii_drake;
             ++curr_position;
         }
         return hash_val%N;
-    }}
+    }
     
 };
 #endif

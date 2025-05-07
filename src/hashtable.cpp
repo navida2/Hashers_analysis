@@ -42,7 +42,7 @@ ListNode * ListNode::remove(string key, ListNode * L){//remove the node that has
                 prev->next = new_next;
                 return L;               
             }
-            previous = main_node;
+            prev = main_node;
             main_node = main_node->next;
             nxt = main_node->next;
         }
@@ -96,7 +96,21 @@ bool HashTable::is_full(){
 void HashTable::print(ostream & out);
 HashTable::~HashTable();
 
-size_t HashTable::number_of_entries();
+size_t HashTable::number_of_entries(){
+    //loop through buf checking if each node is nullptr
+    int num_entrys =0;
+    
+    for (size_t i=0; i<capacity;++i){
+        ListNode* first_entry = buf[i];
+        if (node == nullptr){
+            continue;
+        }
+        else{
+            num_entrys+=1;
+        }
+    return num_entrys;
+    }
+}
 size_t HashTable::number_of_chains();
 void HashTable::get_chain_lengths(vector<int> & v);
 

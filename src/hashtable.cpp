@@ -102,14 +102,17 @@ size_t HashTable::number_of_entries(){
     
     for (size_t i=0; i<capacity;++i){
         ListNode* first_entry = buf[i];
-        if (node == nullptr){
+        if (first_entry == nullptr){
             continue;
         }
         else{
+            //add it so ther is sum countirng for chaininsssss
+            for(;first_entry!=nullptr;first_entry = first_entry->next)
             num_entrys+=1;
         }
-    return num_entrys;
+    
     }
+    return num_entrys;
 }
 size_t HashTable::number_of_chains();
 void HashTable::get_chain_lengths(vector<int> & v);

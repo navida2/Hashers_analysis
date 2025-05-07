@@ -43,6 +43,7 @@ Stats::Stats(string name, const vector<int> & chain_lengths) : name(name), chain
     chains = chain_lengths.size();
     for (int elem: chain_lengths){
         entries+=elem;
+        ++histogram[elem];
     }
     load_factor = static_cast<double>(entries) / chains;
     span = max-min;

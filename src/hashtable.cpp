@@ -215,18 +215,50 @@ void remove_all_words(string file_name, HashTable & L){
 
 void measure_hashtable(string file_name, HashTable & L){
     cout<<L.name<<endl;
-    for(int K=1;K<=10;++K){
-        cout<<"\tK = "<<K<<endl;
-        insert_all_words(K, file_name,L);
-        find_all_words(K,file_name,L);
-        remove_all_words(K,file_name,L);
-        if(!L.is_empty()){
-            error(L.name, "is not empty");
-        }
+    insert_all_words(file_name, L);
+
+    vector<int> chain_lengths;
+    L.get_chain_lengths(chain_lengths);
+    Stats stats(L.get_name(), chain_lengths);
+    stats.print(cout);
+
+    find_all_words(file_name,L);
+    remove_all_words(file_name, L);
+    if(!L.is_empty()){
+        error(L.get_name(), "is not empty");
     }
 
 }
 
 void measure_hashtables(string input_file){
+    Hasher * H[] ={
+        new ChatGPTHasher{},
+        // new GoodrichHasher{},
+        new MultHasher{},
+        // new PreissHasher{},
+        // new PJWHasher{},
+        // new PRHHasher{},
+        // new STLHasher{},
+        // new SumHasher{},
+        // new Weiss1Hasher{},
+        // new Weiss2Hasher{},
+        // new WeissHasher{},
 
+    };
+    int S[] = {
+        // 10000,
+        //1000,
+        100,
+        //10,
+        //1,
+    };
+    for (auto size:S){
+        for(auto h:H){
+            HashTable ht(*h,size);
+            measure_hashtable(input_file,ht);
+        }
+    }
+    for(auto h:H){
+        delete h; //delete da ht before returning
+    }
 }

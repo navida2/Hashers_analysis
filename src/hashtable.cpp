@@ -83,7 +83,14 @@ void ListNode::error(string word, string msg){
 
 void HashTable::insert( const string & word);
 
-bool HashTable::find( const string & word);
+bool HashTable::find( const string & word){
+    //get the has value and then use find lsit node
+    size_t hash_value = hasher(word) %capacity; //this is hashing value then u would get the buf index and pass into hash
+    ListNode* list_at_hash_value = buf[hash_value];
+    ListNode* found_or_not = ListNode::find(word, list_at_hash_value);
+    return !(found_or_not==nullptr);
+
+}
 
 void HashTable::remove( const string & word);
 
@@ -118,7 +125,7 @@ size_t HashTable::number_of_chains(){
     //count how many non null there are
     size_t num_entrys =0;
     
-    for (int i=0; i<capacity;++i){
+    for (size_t i=0; i<capacity;++i){
         ListNode* first_entry = buf[i];
         if (first_entry == nullptr){
             continue;

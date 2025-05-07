@@ -174,7 +174,19 @@ void insert_all_words(string file_name, HashTable & L){
     in.close();
     cout<<"\t\tI = " <<eTime<<endl;
 }
-void find_all_words(string file_name, HashTable & L);
+void find_all_words(string file_name, HashTable & L){
+    Timer t;
+    double eTime;
+    ifstream in(file_name);
+    int limit = k *NWORDS /10;
+    t.start();
+    for (string word; (in>>word)&&limit>0; --limit){
+        L.find(word);
+    }
+    t.elapsedUserTime(eTime);
+    in.close();
+    cout<<"\t\tF = " <<eTime<<endl;
+}
 void remove_all_words(string file_name, HashTable & L){
     Timer t;
     double eTime;

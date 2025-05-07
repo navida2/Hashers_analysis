@@ -19,3 +19,15 @@ double compute_stddev(const std::vector<int> &v){
     }
     return std::sqrt(sum_squares/len);
 }
+//make cosntrcutor
+Stats::Stats(string name, const vector<int> & chain_lengths) : name(name), chain_lengths(chain_lengths){
+    //THIS IS EVERYTHING I NEED TO CALCUATER
+    // int entries = 0;
+    // int chains = 0;
+    // double load_factor = 0;
+    // int min = 0;
+    // int max = 0;
+    // int span = 0;
+    // double mean = 0;
+    // double stddev = 0;//
+}

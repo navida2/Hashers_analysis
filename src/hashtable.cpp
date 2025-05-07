@@ -26,23 +26,27 @@ ListNode * ListNode::remove(string key, ListNode * L){//remove the node that has
         //first check if its head
         ListNode* main_node = L;
         ListNode* prev = L;
-        if (main_node->data==word){
+        if (main_node->data==key){
             ListNode* main_node = L;
             ListNode* prev_head = main_node;
             L = main_node->next;
             delete prev_head;
-            return main_node;
+            return L;
         }
         //Now handke the ccase where its not the main node
         ListNode* nxt = L->next;
         for(;main_node!=nullptr;){
-            if(main_node->data == word){
+            if(main_node->data == key){
                 ListNode* new_next =nxt;
-                ListNode* old_main = main_node;
                 delete main_node;
-                prev->next               
+                prev->next = new_next;
+                return L;               
             }
+            previous = main_node;
+            main_node = main_node->next;
+            nxt = main_node->next;
         }
+    return L;
     }
 }
 void ListNode::print(ostream & out, ListNode * L){//Traverse list and print everything

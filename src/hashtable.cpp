@@ -108,7 +108,12 @@ bool HashTable::is_empty(){//use number of entries for this
 bool HashTable::is_full(){
     return false;
 }
-void HashTable::print(ostream & out);
+void HashTable::print(ostream & out){
+    for(size_t i=0;i<capacity;++i){
+        ListNode* to_print = buf[i];
+        ListNode::print(out,to_print);
+    }
+}
 HashTable::~HashTable(){
     for(size_t i =0;i<capacity;++i){
         ListNode* to_delete = buf[i];

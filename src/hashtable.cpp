@@ -265,5 +265,6 @@ void measure_hashtables(string input_file){
             measure_hashtable(input_file,ht);
         }
     }
-    
+    delete H[0];
+    delete H[1];
 }

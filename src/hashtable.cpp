@@ -109,7 +109,14 @@ bool HashTable::is_full(){
     return false;
 }
 void HashTable::print(ostream & out);
-HashTable::~HashTable();
+HashTable::~HashTable(){
+    for(size_t i =0;i<capacity;++i){
+        ListNode* to_delete = buf[i];
+        ListNode::delete_list(to_delete);
+    }
+    delete[] buf;
+    
+}
 
 size_t HashTable::number_of_entries(){
     //loop through buf checking if each node is nullptr
@@ -214,4 +221,7 @@ void measure_hashtable(string file_name, HashTable & L){
     }
 
 }
-void measure_hashtables(string input_file);
+
+void measure_hashtables(string input_file){
+
+}

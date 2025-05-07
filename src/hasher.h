@@ -247,7 +247,8 @@ struct MyHasher
 {
     MyHasher()
         : Hasher("MyHasher")
-    {
+    {//basically plan is to get every value in ascsii multiply it by its position and by the ascii of "drake" for fun
+    
     }
     size_t hash_val=0;
 };

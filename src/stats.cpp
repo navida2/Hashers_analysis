@@ -1,5 +1,5 @@
 #include <cmath>
-#include "stats.h";
+#include "stats.h"
 
 double compute_mean(const std::vector<int> &v){
     double sum = 0;

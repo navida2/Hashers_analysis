@@ -1,10 +1,15 @@
+#include "hashtable.h"
+#include "Timer.h"
+#include "stats.h"
+#include <fstream>
+#include <iostream>
 ListNode * ListNode::find(string key, ListNode * L){
     if (L == nullptr){
         error("ListNode", " Is empty");
     }
     else{
         //loop through each checking if L.data == key then going to next if not
-        ListNode* new_l = L
+        ListNode* new_l = L;
         for(;new_l!=nullptr;){
             if(new_l->data == key){
                 return new_l;
@@ -13,6 +18,7 @@ ListNode * ListNode::find(string key, ListNode * L){
         }
         return nullptr; 
     }
+    return nullptr;
 }
 ListNode * ListNode::insert(string key, ListNode * L){//insert at head
     ListNode* new_head = new ListNode(key,L);
@@ -48,6 +54,7 @@ ListNode * ListNode::remove(string key, ListNode * L){//remove the node that has
         }
     return L;
     }
+    return L;
 }
 void ListNode::print(ostream & out, ListNode * L){//Traverse list and print everything
     ListNode * printing_node = L;
@@ -71,25 +78,25 @@ void ListNode::delete_list(ListNode * L){//trav the list deleting each node till
     ListNode* next_node = curr_node->next;
     for(;curr_node!=nullptr;){
         delete curr_node;
-        curr_node=new_next;
-        next_node = curr->next;
+        curr_node=next_node;
+        next_node = curr_node->next;
 
     }
 }
-void ListNode::error(string word, string msg){
+void error(string word, string msg){
     cout<<word<<msg<<endl;
 }
 
 
 void HashTable::insert( const string & word){
-    size_t hash_value = hasher(word) %capacity; 
+    size_t hash_value = hasher.hash(word,capacity);
     ListNode* list_at_hash_value = buf[hash_value];
     buf[hash_value] = ListNode::insert(word, list_at_hash_value);
 }
 
 bool HashTable::find( const string & word){
     //get the has value and then use find lsit node
-    size_t hash_value = hasher(word) %capacity; //this is hashing value then u would get the buf index and pass into hash
+    size_t hash_value = hasher.hash(word,capacity); //this is hashing value then u would get the buf index and pass into hash
     ListNode* list_at_hash_value = buf[hash_value];
     ListNode* found_or_not = ListNode::find(word, list_at_hash_value);
     return !(found_or_not==nullptr);
@@ -97,7 +104,7 @@ bool HashTable::find( const string & word){
 }
 
 void HashTable::remove( const string & word){
-    size_t hash_value = hasher(word) %capacity; 
+    size_t hash_value = hasher.hash(word,capacity); 
     ListNode* list_at_hash_value = buf[hash_value];
     buf[hash_value] = ListNode::remove(word, list_at_hash_value);
 }
@@ -160,7 +167,7 @@ size_t HashTable::number_of_chains(){
 void HashTable::get_chain_lengths(vector<int> & v){
     //loop thru the buff and then coun thechains and entreis
 
-    for (int i = 0; i<capacity;++i){
+    for (size_t i = 0; i<capacity;++i){
         int num_per_buf = 0;
         ListNode* first_entry = buf[i];
         if(first_entry!=nullptr){
@@ -177,7 +184,7 @@ void insert_all_words(string file_name, HashTable & L){
     Timer t;
     double eTime;
     ifstream in(file_name);
-    int limit = k *NWORDS /10;
+    int limit = NWORDS /10;
     t.start();
     for (string word; (in>>word)&&limit>0; --limit){
         L.insert(word);
@@ -190,7 +197,7 @@ void find_all_words(string file_name, HashTable & L){
     Timer t;
     double eTime;
     ifstream in(file_name);
-    int limit = k *NWORDS /10;
+    int limit = NWORDS /10;
     t.start();
     for (string word; (in>>word)&&limit>0; --limit){
         L.find(word);
@@ -203,10 +210,10 @@ void remove_all_words(string file_name, HashTable & L){
     Timer t;
     double eTime;
     ifstream in(file_name);
-    int limit = k *NWORDS /10;
+    int limit = NWORDS /10;
     t.start();
     for (string word; (in>>word)&&limit>0; --limit){
-        L.remove();
+        L.remove(word);
     }
     t.elapsedUserTime(eTime);
     in.close();
@@ -214,7 +221,7 @@ void remove_all_words(string file_name, HashTable & L){
 }
 
 void measure_hashtable(string file_name, HashTable & L){
-    cout<<L.name<<endl;
+    cout<<L.get_name()<<endl;
     insert_all_words(file_name, L);
 
     vector<int> chain_lengths;
@@ -258,7 +265,5 @@ void measure_hashtables(string input_file){
             measure_hashtable(input_file,ht);
         }
     }
-    for(auto h:H){
-        delete h; //delete da ht before returning
-    }
+    
 }

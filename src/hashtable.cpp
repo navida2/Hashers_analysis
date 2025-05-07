@@ -92,7 +92,11 @@ bool HashTable::find( const string & word){
 
 }
 
-void HashTable::remove( const string & word);
+void HashTable::remove( const string & word){
+    size_t hash_value = hasher(word) %capacity; 
+    ListNode* list_at_hash_value = buf[hash_value];
+    ListNode::remove(word, list_at_hash_value);
+}
 
 bool HashTable::is_empty(){//use number of entries for this 
     return number_of_entries() == 0;

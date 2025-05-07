@@ -23,9 +23,26 @@ ListNode * ListNode::remove(string key, ListNode * L){//remove the node that has
         error("ListNode", " Is empty");
     }
     else{
-        ListNode* curr = L;
-        ListNode* next = curr->next; //COME BACK AND FINISH
-        for(curr!=)
+        //first check if its head
+        ListNode* main_node = L;
+        ListNode* prev = L;
+        if (main_node->data==word){
+            ListNode* main_node = L;
+            ListNode* prev_head = main_node;
+            L = main_node->next;
+            delete prev_head;
+            return main_node;
+        }
+        //Now handke the ccase where its not the main node
+        ListNode* nxt = L->next;
+        for(;main_node!=nullptr;){
+            if(main_node->data == word){
+                ListNode* new_next =nxt;
+                ListNode* old_main = main_node;
+                delete main_node;
+                prev->next               
+            }
+        }
     }
 }
 void ListNode::print(ostream & out, ListNode * L){//Traverse list and print everything
@@ -61,8 +78,11 @@ void ListNode::error(string word, string msg){
 
 
 void HashTable::insert( const string & word);
+
 bool HashTable::find( const string & word);
+
 void HashTable::remove( const string & word);
+
 bool HashTable::is_empty(){//use number of entries for this 
     return number_of_entries() == 0;
 }

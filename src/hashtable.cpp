@@ -18,7 +18,7 @@ ListNode * ListNode::find(string key, ListNode * L){
         }
         return nullptr; 
     }
-    return nullptr;
+    return L;
 }
 ListNode * ListNode::insert(string key, ListNode * L){//insert at head
     ListNode* new_head = new ListNode(key,L);
@@ -75,8 +75,9 @@ int ListNode::length(ListNode * L){//count number of nodes in the list
 }
 void ListNode::delete_list(ListNode * L){//trav the list deleting each node till its done
     ListNode* curr_node = L;
-    ListNode* next_node = curr_node->next;
+    
     for(;curr_node!=nullptr;){
+        ListNode* next_node = curr_node->next;
         delete curr_node;
         curr_node=next_node;
         next_node = curr_node->next;
@@ -166,7 +167,7 @@ size_t HashTable::number_of_chains(){
 }
 void HashTable::get_chain_lengths(vector<int> & v){
     //loop thru the buff and then coun thechains and entreis
-
+    v.resize(capacity);
     for (size_t i = 0; i<capacity;++i){
         int num_per_buf = 0;
         ListNode* first_entry = buf[i];
@@ -265,6 +266,5 @@ void measure_hashtables(string input_file){
             measure_hashtable(input_file,ht);
         }
     }
-    delete H[0];
-    delete H[1];
+ 
 }

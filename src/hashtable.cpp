@@ -241,24 +241,25 @@ void measure_hashtable(string file_name, HashTable & L){
 void measure_hashtables(string input_file){
     Hasher * H[] ={
         new ChatGPTHasher{},
-        // new GoodrichHasher{},
+        new GoodrichHasher{},
         new MultHasher{},
-        // new PreissHasher{},
-        // new PJWHasher{},
-        // new PRHHasher{},
-        // new STLHasher{},
-        // new SumHasher{},
-        // new Weiss1Hasher{},
-        // new Weiss2Hasher{},
-        // new WeissHasher{},
+        new PreissHasher{},
+        new PJWHasher{},
+        
+        new STLHasher{},
+        new SumHasher{},
+        new Weiss1Hasher{},
+        new Weiss2Hasher{},
+        new WeissHasher{},
+        
 
     };
     int S[] = {
-        // 10000,
-        //1000,
+        10000,
+        1000,
         100,
-        //10,
-        //1,
+        10,
+        1,
     };
     for (auto size:S){
         for(auto h:H){

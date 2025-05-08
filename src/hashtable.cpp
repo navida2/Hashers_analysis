@@ -28,32 +28,29 @@ ListNode * ListNode::insert(string key, ListNode * L){//insert at head
 ListNode * ListNode::remove(string key, ListNode * L){//remove the node that has the key
     if (L == nullptr){
         error("ListNode", " Is empty");
+        return nullptr;
     }
-    else{
+    else if(L->data==key){
         //first check if its head
         ListNode* main_node = L;
-        ListNode* prev = L;
-        if (main_node->data==key){
-            ListNode* main_node = L;
-            ListNode* prev_head = main_node;
-            L = main_node->next;
-            delete prev_head;
-            return L;
-        }
+        ListNode* nxt = main_node->next;
+        delete main_node;
+        return nxt;}
+    
+    else{
         //Now handke the ccase where its not the main node
-        ListNode* nxt = L->next;
+        ListNode* main_node = L->next;
+        ListNode* previous_node = L;
         for(;main_node!=nullptr;){
             if(main_node->data == key){
-                ListNode* new_next =nxt;
+                previous_node->next=main_node->next;
                 delete main_node;
-                prev->next = new_next;
+
                 return L;               
             }
-            prev = main_node;
+            previous_node = main_node;
             main_node = main_node->next;
-            nxt = main_node->next;
         }
-    return L;
     }
     return L;
 }
@@ -186,7 +183,7 @@ void insert_all_words(string file_name, HashTable & L){
     Timer t;
     double eTime;
     ifstream in(file_name);
-    int limit = NWORDS /10;
+    int limit = NWORDS;
     t.start();
     for (string word; (in>>word)&&limit>0; --limit){
         L.insert(word);
@@ -199,7 +196,7 @@ void find_all_words(string file_name, HashTable & L){
     Timer t;
     double eTime;
     ifstream in(file_name);
-    int limit = NWORDS /10;
+    int limit = NWORDS;
     t.start();
     for (string word; (in>>word)&&limit>0; --limit){
         L.find(word);
@@ -212,7 +209,7 @@ void remove_all_words(string file_name, HashTable & L){
     Timer t;
     double eTime;
     ifstream in(file_name);
-    int limit = NWORDS /10;
+    int limit = NWORDS;
     t.start();
     for (string word; (in>>word)&&limit>0; --limit){
         L.remove(word);
@@ -230,7 +227,6 @@ void measure_hashtable(string file_name, HashTable & L){
     L.get_chain_lengths(chain_lengths);
     Stats stats(L.get_name(), chain_lengths);
     stats.print(cout);
-
     find_all_words(file_name,L);
     remove_all_words(file_name, L);
     if(!L.is_empty()){
@@ -256,9 +252,9 @@ void measure_hashtables(string input_file){
 
     };
     int S[] = {
-        10000,
-        1000,
-        100,
+        // 10000,
+        // 1000,
+        // 100,
         10,
         1,
     };

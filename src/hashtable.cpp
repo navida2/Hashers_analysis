@@ -3,6 +3,7 @@
 #include "stats.h"
 #include <fstream>
 #include <iostream>
+
 ListNode * ListNode::find(string key, ListNode * L){
     if (L == nullptr){
         error("ListNode", " Is empty");
@@ -80,8 +81,7 @@ void ListNode::delete_list(ListNode * L){//trav the list deleting each node till
         ListNode* next_node = curr_node->next;
         delete curr_node;
         curr_node=next_node;
-        next_node = curr_node->next;
-
+//refacted this to assign lsit node at the front
     }
 }
 void error(string word, string msg){

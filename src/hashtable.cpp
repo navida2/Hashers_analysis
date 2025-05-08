@@ -26,11 +26,11 @@ ListNode * ListNode::insert(string key, ListNode * L){//insert at head
     return new_head; 
 }
 ListNode * ListNode::remove(string key, ListNode * L){//remove the node that has the key
-    if (L == nullptr){
+    if (L == nullptr){//sad apth check if empty
         error("ListNode", " Is empty");
         return nullptr;
     }
-    else if(L->data==key){
+    else if(L->data==key){//check if head needs da removing
         //first check if its head
         ListNode* main_node = L;
         ListNode* nxt = main_node->next;
@@ -148,24 +148,12 @@ size_t HashTable::number_of_entries(){
 }
 size_t HashTable::number_of_chains(){
     //count how many non null there are
-    return capacity;
-//     size_t num_entrys =0;
-    
-//     for (size_t i=0; i<capacity;++i){
-//         ListNode* first_entry = buf[i];
-//         if (first_entry == nullptr){
-//             continue;
-//         }
-//         else{
-//             num_entrys+=1;
-//         }
-    
-// }
-//     return num_entrys;
+    return capacity; //fixed from eddiscussion
+
 }
 void HashTable::get_chain_lengths(vector<int> & v){
     //loop thru the buff and then coun thechains and entreis
-    v.resize(capacity);
+    v.resize(capacity); //resize due to seg fault happeing from not capacity sized elem
     for (size_t i = 0; i<capacity;++i){
         int num_per_buf = 0;
         ListNode* first_entry = buf[i];
@@ -248,13 +236,14 @@ void measure_hashtables(string input_file){
         new Weiss1Hasher{},
         new Weiss2Hasher{},
         new WeissHasher{},
+        new MyHasher{},
         
 
     };
     int S[] = {
         // 10000,
-        // 1000,
-        // 100,
+        1000,
+        100,
         10,
         1,
     };

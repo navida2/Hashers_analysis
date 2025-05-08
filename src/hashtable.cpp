@@ -241,7 +241,7 @@ void measure_hashtables(string input_file){
 
     };
     int S[] = {
-        // 10000,
+        10000,
         1000,
         100,
         10,
